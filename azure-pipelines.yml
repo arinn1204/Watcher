@@ -57,7 +57,9 @@ stages:
       inputs:
         command: buildAndPush
         repository: trixter1394/Watcher
-        tags: latest
+        tags: |
+          latest
+          linux-latest
         dockerfile: ./Dockerfile
     - task: Docker@2
       inputs:
@@ -74,7 +76,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: trixter1394/Watcher
-        tags: latest
+        tags: windows-latest
         dockerfile: ./Dockerfile
     - task: Docker@2
       inputs:
