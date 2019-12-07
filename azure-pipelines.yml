@@ -6,9 +6,6 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
   buildConfiguration: 'Release'
   testConfiguration: 'Release'
@@ -53,6 +50,8 @@ stages:
   dependsOn: Build_And_Unit_Test
   jobs:
   - job: Docker
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
     - download: current
       artifact: Watcher
