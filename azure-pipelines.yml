@@ -9,7 +9,9 @@ trigger:
 variables:
   buildConfiguration: 'Release'
   testConfiguration: 'Release'
-  test_catalog: $(db_catalog)_test
+
+pool:
+  vmImage: 'ubuntu-latest'
 
 stages:
 - stage: Build_And_Unit_Test
@@ -18,7 +20,7 @@ stages:
   jobs:
   - job: Watcher
     variables:
-      solution: 'src\Watcher.sln'
+      solution: 'src/Watcher.sln'
     steps:
     - powershell: Get-ChildItem -Recurse
     - task: DotNetCoreCLI@2
@@ -28,31 +30,29 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: build
-        projects: 'src\test\**\*.csproj'
+        projects: 'src/test/**/*.csproj'
         arguments: '-c $(testConfiguration)'
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: 'src\test\**\*.csproj'
+        projects: 'src/test/**/*.csproj'
         arguments: '-c $(testConfiguration)'
     - task: DotNetCoreCLI@2
       inputs:
         command: build
-        projects: 'src\main\**\Watcher.csproj'
+        projects: 'src/main/**/Watcher.csproj'
         arguments: '-c $(buildConfiguration)'    
     - task: DotNetCoreCLI@2
       inputs:
         command: publish
-        projects: 'src\main\**\Watcher.csproj'
+        projects: 'src/main/**/Watcher.csproj'
         arguments: '-c $(buildConfiguration)'    
-    - publish: 'src\main\Watcher\bin\$(buildConfiguration)\netcoreapp3.0\publish.zip'
+    - publish: 'src/main/Watcher/bin/$(buildConfiguration)/netcoreapp3.0/publish.zip'
       artifact: Watcher
 - stage: Deploy
   dependsOn: Build_And_Unit_Test
   jobs:
   - job: Docker
-    pool:
-      vmImage: 'ubuntu-latest'
     steps:
     - download: current
       artifact: Watcher
