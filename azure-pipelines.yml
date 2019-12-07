@@ -13,13 +13,12 @@ variables:
 
 stages:
 - stage: Build_And_Unit_Test
-  variables:
-    dacpacLocation: 'src\database\VideoDB\bin\$(buildConfiguration)\VideoDB.dacpac'
   jobs:
   - job: Watcher
     variables:
       solution: 'src\Watcher.sln'
     steps:
+    - powershell: Get-ChildItem -Recurse
     - task: DotNetCoreCLI@2
       inputs:
         command: restore
