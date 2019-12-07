@@ -1,0 +1,21 @@
+.idea/*
+**/bin/*
+**/obj/*
+*.DotSettings.*
+**/.vs/*
+**/.idea/*
+**/DBContext/*
+**/Migrations/*
+**/TestResults/*
+Reports/**
+
+**/*.feature.cs
+**/Import Schema Logs
+*.dbmdl
+*.jfm
+*.sqlproj.user
+*.refactorlog
+*.publish.xml
+src/packages
+**\*.user
+**/*.user
