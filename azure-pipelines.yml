@@ -13,6 +13,8 @@ variables:
 
 stages:
 - stage: Build_And_Unit_Test
+  variables:
+    System.Debug: true
   jobs:
   - job: Watcher
     variables:
