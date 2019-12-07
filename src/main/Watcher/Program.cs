@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿using Autofac;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
+using Watcher.Interfaces;
 
 namespace Watcher
 {
@@ -13,14 +9,31 @@ namespace Watcher
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("WATCHER_ENVIRONMENT")}.json", true)
+                .AddEnvironmentVariables()
+                .Build();
+
+            var startup = new Startup(config);
+            var serviceContainer = BuildServiceContainer(startup);
+
+            BuildWatcher(serviceContainer)
+                .Run(args);
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        private static IWatcher BuildWatcher(IContainer serviceContainer)
+        {
+            var watcherBuilder = serviceContainer.Resolve<IWatcherBuilder>();
+
+            return watcherBuilder
+                .Build();
+        }
+
+        private static IContainer BuildServiceContainer(Startup startup)
+        {
+            var containerBuilder = new ContainerBuilder();
+            return startup.ConfigureServices(containerBuilder);
+        }
     }
 }
