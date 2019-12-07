@@ -47,20 +47,19 @@ stages:
         command: publish
         projects: 'src\main\**\Watcher.csproj'
         arguments: '-c $(buildConfiguration)'    
-  - stage: Deploy
-    dependsOn: Build_And_Unit_Test
-    jobs:
-    - job: Docker
-      steps:
-      - task: Docker@2
-        inputs:
-          command: login
-      - task: Docker@2
-        inputs:
-          command: buildAndPush
-          repository: trixter1394/Watcher
-          tags: latest
-      - task: Docker@2
-        inputs:
-          command: logout
-  
+- stage: Deploy
+  dependsOn: Build_And_Unit_Test
+  jobs:
+  - job: Docker
+    steps:
+    - task: Docker@2
+      inputs:
+        command: login
+    - task: Docker@2
+      inputs:
+        command: buildAndPush
+        repository: trixter1394/Watcher
+        tags: latest
+    - task: Docker@2
+      inputs:
+        command: logout
