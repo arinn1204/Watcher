@@ -42,7 +42,7 @@ stages:
         command: build
         projects: 'src/main/**/Watcher.csproj'
         arguments: '-c $(buildConfiguration)'    
-    - publish: 'src/main/Watcher/bin/$(buildConfiguration)/netcoreapp3.0/*'
+    - publish: 'src/main/Watcher/bin/$(buildConfiguration)/netcoreapp3.0'
       artifact: Watcher
 - stage: Deploy
   dependsOn: Build_And_Unit_Test
