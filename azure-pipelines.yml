@@ -19,7 +19,7 @@ stages:
   variables:
     dacpacLocation: 'src\database\VideoDB\bin\$(buildConfiguration)\VideoDB.dacpac'
   jobs:
-  - job: WebApi
+  - job: Watcher
     variables:
       solution: 'src\Watcher.sln'
     steps:
