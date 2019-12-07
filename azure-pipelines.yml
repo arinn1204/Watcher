@@ -47,19 +47,25 @@ stages:
         command: publish
         projects: 'src\main\**\Watcher.csproj'
         arguments: '-c $(buildConfiguration)'    
+    - publish: 'src\main\Watcher\bin\$(buildConfiguration)\netcoreapp3.0\publish.zip'
+      artifact: Watcher
 - stage: Deploy
   dependsOn: Build_And_Unit_Test
   jobs:
   - job: Docker
     steps:
+    - download: current
+      artifact: Watcher
     - task: Docker@2
       inputs:
         command: login
+        containerRegistry: $(dockerRegistry)
     - task: Docker@2
       inputs:
         command: buildAndPush
         repository: trixter1394/Watcher
         tags: latest
+        dockerfile: ./Dockerfile
     - task: Docker@2
       inputs:
         command: logout
