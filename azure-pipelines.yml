@@ -42,15 +42,11 @@ stages:
         command: build
         projects: 'src/main/**/Watcher.csproj'
         arguments: '-c $(buildConfiguration)'    
-    - publish: 'src/main/Watcher/bin/$(buildConfiguration)/netcoreapp3.0'
-      artifact: Watcher
 - stage: Deploy
   dependsOn: Build_And_Unit_Test
   jobs:
   - job: Docker
     steps:
-    - download: current
-      artifact: Watcher
     - task: Docker@2
       inputs:
         command: login
