@@ -17,7 +17,6 @@ namespace Watcher
 
         internal IContainer ConfigureServices(ContainerBuilder container)
         {
-            container.RegisterInstance(_config);
             return container.Build();
         }
     }
