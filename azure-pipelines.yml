@@ -45,7 +45,26 @@ stages:
 - stage: Deploy
   dependsOn: Build_And_Unit_Test
   jobs:
-  - job: Docker
+  - job: DockerLinux
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      inputs:
+        command: login
+        containerRegistry: $(dockerRegistry)
+    - task: Docker@2
+      inputs:
+        command: buildAndPush
+        repository: trixter1394/Watcher
+        tags: latest
+        dockerfile: ./Dockerfile
+    - task: Docker@2
+      inputs:
+        command: logout
+  - job: DockerWindows
+    pool:
+      vmImage: 'windows-latest'
     steps:
     - task: Docker@2
       inputs:
