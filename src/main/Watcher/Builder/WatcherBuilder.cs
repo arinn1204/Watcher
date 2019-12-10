@@ -9,7 +9,7 @@ namespace Watcher.Runner.Builder
     {
         public IWatcher Build()
         {
-            throw new NotImplementedException();
+            return new SystemWatcher();
         }
     }
 }
