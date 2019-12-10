@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Text;
 using Autofac;
 using Microsoft.Extensions.Configuration;
+using Watcher.Interfaces;
+using Watcher.Runner.Builder;
 
-namespace Watcher
+namespace Watcher.Runner
 {
-    class Startup
+    public class Startup
     {
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
 
         public Startup(IConfiguration config)
         {
             _config = config;
         }
 
-        internal IContainer ConfigureServices(ContainerBuilder container)
+        public IContainer ConfigureServices(ContainerBuilder container)
         {
+            container.RegisterInstance(_config);
+            container.RegisterType<WatcherBuilder>().As<IWatcherBuilder>();
             return container.Build();
         }
     }

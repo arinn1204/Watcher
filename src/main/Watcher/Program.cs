@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using Watcher.Interfaces;
 
-namespace Watcher
+namespace Watcher.Runner
 {
     public class Program
     {

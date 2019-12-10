@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{42D5310F-5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Watcher.UnitTest", "test\Watcher.UnitTest\Watcher.UnitTest.csproj", "{32907BDA-25D4-494B-AAA5-E57F5F645E60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watcher", "main\Watcher\Watcher.csproj", "{CA8F6643-8043-43C8-A027-86EA1644A06E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watcher.Runner", "main\Watcher\Watcher.Runner.csproj", "{CA8F6643-8043-43C8-A027-86EA1644A06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
