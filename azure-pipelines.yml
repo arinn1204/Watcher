@@ -37,11 +37,6 @@ stages:
         command: test
         projects: 'src/test/**/*.csproj'
         arguments: '-c $(testConfiguration)'
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: build
-        projects: 'src/main/**/Watcher.csproj'
-        arguments: '-c $(buildConfiguration)'    
 - stage: Deploy
   dependsOn: Build_And_Unit_Test
   jobs:
