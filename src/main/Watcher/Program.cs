@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using Watcher.Interfaces;
+using Watcher.Runner.Interfaces;
 
 namespace Watcher.Runner
 {
@@ -27,6 +28,8 @@ namespace Watcher.Runner
             var watcherBuilder = serviceContainer.Resolve<IWatcherBuilder>();
 
             return watcherBuilder
+                .WithConfiguration(serviceContainer.Resolve<IConfiguration>())
+                .WithReporter(serviceContainer.Resolve<IReporter>())
                 .Build();
         }
 
