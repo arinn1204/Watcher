@@ -4,6 +4,8 @@ using FluentAssertions;
 using NUnit.Framework;
 using Watcher.Runner;
 using Watcher.Runner.Builder;
+using Watcher.Runner.RabbitReporter.Configuration;
+using Watcher.Runner.Reporter.RabbitReporter;
 
 namespace Watcher.UnitTest
 {
@@ -26,6 +28,21 @@ namespace Watcher.UnitTest
             var watcher = builder.Build();
 
             watcher.Should().BeOfType<SystemWatcher>();
+        }
+
+        [Test]
+        public void ShouldAddProvidedReporter()
+        {
+            var builder = _fixture.Create<WatcherBuilder>();
+            var reporter = new RabbitReporter(new RabbitReporterOptions());
+
+            var watcher = builder
+                .WithReporter(reporter)
+                .Build();
+
+            watcher.Reporter
+                .Should()
+                .Be(reporter);
         }
     }
 }
