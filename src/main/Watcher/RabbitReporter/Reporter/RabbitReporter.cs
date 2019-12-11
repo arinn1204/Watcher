@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Watcher.Runner.Interfaces;
 using Watcher.Runner.RabbitReporter.Configuration;
 
@@ -14,5 +12,10 @@ namespace Watcher.Runner.Reporter.RabbitReporter
         }
 
         public RabbitReporterOptions Configuration { get; }
+
+        public void Report(string textToReport)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
