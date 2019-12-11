@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using Watcher.Interfaces;
 using Watcher.Runner.Interfaces;
+using Watcher.Runner.RabbitReporter.Configuration;
 using Watcher.Runner.RabbitReporter.Extensions;
 
 namespace Watcher.Runner
@@ -24,13 +25,13 @@ namespace Watcher.Runner
                 .Run(args);
         }
 
-        private static IWatcher BuildWatcher(IContainer serviceContainer)
+        private static IWatcher BuildWatcher(IContainer container)
         {
-            var watcherBuilder = serviceContainer.Resolve<IWatcherBuilder>();
+            var watcherBuilder = container.Resolve<IWatcherBuilder>();
 
             return watcherBuilder
-                .WithConfiguration(serviceContainer.Resolve<IConfiguration>())
-                .AddRabbitReporter()
+                .WithConfiguration(container.Resolve<IConfiguration>())
+                .AddRabbitReporter(container.Resolve<RabbitReporterOptions>())
                 .Build();
         }
 
