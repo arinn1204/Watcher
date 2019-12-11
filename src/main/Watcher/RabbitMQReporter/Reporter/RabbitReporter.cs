@@ -1,8 +1,8 @@
 ﻿using System;
 using Watcher.Runner.Interfaces;
-using Watcher.Runner.RabbitReporter.Configuration;
+using Watcher.Runner.RabbitMQReporter.Configuration;
 
-namespace Watcher.Runner.Reporter.RabbitReporter
+namespace Watcher.Runner.Reporter.RabbitMQReporter
 {
     public class RabbitReporter : IReporter
     {

@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using Watcher.Interfaces;
-using Watcher.Runner.RabbitReporter.Configuration;
+using Watcher.Runner.RabbitMQReporter.Configuration;
+using Watcher.Runner.Reporter.RabbitMQReporter;
 
-namespace Watcher.Runner.RabbitReporter.Extensions
+namespace Watcher.Runner.RabbitMQReporter.Extensions
 {
     public static class RabbitReporterExtensions
     {
         public static IWatcherBuilder AddRabbitReporter(this IWatcherBuilder builder, RabbitReporterOptions options)
         {
-            return builder;
+            return builder.WithReporter(new RabbitReporter(options));
         }
     }
 }

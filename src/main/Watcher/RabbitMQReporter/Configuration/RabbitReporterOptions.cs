@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Watcher.Runner.RabbitReporter.Configuration
+namespace Watcher.Runner.RabbitMQReporter.Configuration
 {
     public class RabbitReporterOptions
     {

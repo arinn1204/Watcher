@@ -2,9 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using Watcher.Interfaces;
-using Watcher.Runner.Interfaces;
-using Watcher.Runner.RabbitReporter.Configuration;
-using Watcher.Runner.RabbitReporter.Extensions;
+using Watcher.Runner.RabbitMQReporter.Configuration;
+using Watcher.Runner.RabbitMQReporter.Extensions;
 
 namespace Watcher.Runner
 {

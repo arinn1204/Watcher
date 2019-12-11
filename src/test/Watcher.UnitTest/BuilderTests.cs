@@ -7,8 +7,6 @@ using NUnit.Framework;
 using Watcher.Runner;
 using Watcher.Runner.Builder;
 using Watcher.Runner.Interfaces;
-using Watcher.Runner.RabbitReporter.Configuration;
-using Watcher.Runner.Reporter.RabbitReporter;
 
 namespace Watcher.UnitTest
 {
@@ -52,15 +50,15 @@ namespace Watcher.UnitTest
         public void ShouldAddIConfiguration()
         {
             var builder = _fixture.Create<WatcherBuilder>();
-            var reporter = _fixture.Freeze<IConfiguration>();
+            var configuration = _fixture.Freeze<IConfiguration>();
 
             var watcher = builder
-                .WithConfiguration(reporter)
+                .WithConfiguration(configuration)
                 .Build();
 
             watcher.Configuration
                 .Should()
-                .Be(reporter);
+                .Be(configuration);
 
         }
     }
