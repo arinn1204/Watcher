@@ -15,7 +15,13 @@ namespace Watcher.Runner.Builder
 
         public IWatcher Build()
         {
-            return new SystemWatcher(_reporter);
+            return new SystemWatcher(_reporter, _configuration);
+        }
+
+        public IWatcherBuilder WithConfiguration(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            return this;
         }
 
         public IWatcherBuilder WithReporter(IReporter reporter)

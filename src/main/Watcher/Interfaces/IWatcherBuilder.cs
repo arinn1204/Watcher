@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Watcher.Runner.Interfaces;
@@ -9,5 +10,6 @@ namespace Watcher.Interfaces
     {
         IWatcher Build();
         IWatcherBuilder WithReporter(IReporter reporter);
+        IWatcherBuilder WithConfiguration(IConfiguration configuration);
     }
 }

@@ -1,9 +1,12 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using FluentAssertions;
+using Microsoft.Extensions.Configuration;
+using Moq;
 using NUnit.Framework;
 using Watcher.Runner;
 using Watcher.Runner.Builder;
+using Watcher.Runner.Interfaces;
 using Watcher.Runner.RabbitReporter.Configuration;
 using Watcher.Runner.Reporter.RabbitReporter;
 
@@ -34,7 +37,7 @@ namespace Watcher.UnitTest
         public void ShouldAddProvidedReporter()
         {
             var builder = _fixture.Create<WatcherBuilder>();
-            var reporter = new RabbitReporter(new RabbitReporterOptions());
+            var reporter = _fixture.Freeze<IReporter>();
 
             var watcher = builder
                 .WithReporter(reporter)
@@ -43,6 +46,22 @@ namespace Watcher.UnitTest
             watcher.Reporter
                 .Should()
                 .Be(reporter);
+        }
+
+        [Test]
+        public void ShouldAddIConfiguration()
+        {
+            var builder = _fixture.Create<WatcherBuilder>();
+            var reporter = _fixture.Freeze<IConfiguration>();
+
+            var watcher = builder
+                .WithConfiguration(reporter)
+                .Build();
+
+            watcher.Configuration
+                .Should()
+                .Be(reporter);
+
         }
     }
 }
