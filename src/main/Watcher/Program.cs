@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using Watcher.Interfaces;
 using Watcher.Runner.Interfaces;
+using Watcher.Runner.RabbitReporter.Extensions;
 
 namespace Watcher.Runner
 {
@@ -29,7 +30,7 @@ namespace Watcher.Runner
 
             return watcherBuilder
                 .WithConfiguration(serviceContainer.Resolve<IConfiguration>())
-                .WithReporter(serviceContainer.Resolve<IReporter>())
+                .AddRabbitReporter()
                 .Build();
         }
 
