@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 using System;
 using Watcher.Interfaces;
-using Watcher.Runner.RabbitMQReporter.Configuration;
 using Watcher.Runner.RabbitMQReporter.Extensions;
 
 namespace Watcher.Runner
@@ -30,7 +30,7 @@ namespace Watcher.Runner
 
             return watcherBuilder
                 .WithConfiguration(container.Resolve<IConfiguration>())
-                .AddRabbitReporter(container.Resolve<RabbitReporterOptions>())
+                .AddRabbitReporter(container.Resolve<IConnection>())
                 .Build();
         }
 

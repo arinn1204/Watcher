@@ -1,17 +1,17 @@
-﻿using System;
+﻿using RabbitMQ.Client;
+using System;
 using Watcher.Runner.Interfaces;
-using Watcher.Runner.RabbitMQReporter.Configuration;
 
 namespace Watcher.Runner.Reporter.RabbitMQReporter
 {
     public class RabbitReporter : IReporter
     {
-        public RabbitReporter(RabbitReporterOptions configuration)
+        public RabbitReporter(IConnection connection)
         {
-            Configuration = configuration;
+            Connection = connection;
         }
 
-        public RabbitReporterOptions Configuration { get; }
+        public IConnection Connection { get; }
 
         public void Report(string textToReport)
         {
