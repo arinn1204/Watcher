@@ -27,10 +27,11 @@ namespace Watcher.Runner
         private static IWatcher BuildWatcher(IContainer container)
         {
             var watcherBuilder = container.Resolve<IWatcherBuilder>();
+            var config = container.Resolve<IConfiguration>();
 
             return watcherBuilder
-                .WithConfiguration(container.Resolve<IConfiguration>())
-                .AddRabbitReporter(container.Resolve<IConnection>())
+                .WithConfiguration(config)
+                .AddRabbitReporter(config)
                 .Build();
         }
 
