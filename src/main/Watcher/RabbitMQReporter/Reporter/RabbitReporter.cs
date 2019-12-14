@@ -13,7 +13,7 @@ namespace Watcher.Runner.Reporter.RabbitMQReporter
 
         public IConnection Connection { get; }
 
-        public void Report(string textToReport)
+        public void Report(object message)
         {
             throw new NotImplementedException();
         }

@@ -6,6 +6,6 @@ namespace Watcher.Runner.Interfaces
 {
     public interface IReporter
     {
-        void Report(string textToReport);
+        void Report(object message);
     }
 }

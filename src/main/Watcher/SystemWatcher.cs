@@ -21,7 +21,7 @@ namespace Watcher.Runner
 
         public void Run(string[] args)
         {
-            throw new NotImplementedException();
+            Reporter.Report("Hello, World!");
         }
     }
 }
