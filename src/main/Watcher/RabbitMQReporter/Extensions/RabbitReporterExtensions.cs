@@ -24,9 +24,13 @@ namespace Watcher.Runner.RabbitMQReporter.Extensions
 
             var connection = factory.CreateConnection();
             var model = connection.CreateModel();
+            var exchangeName =
+                exchangeConfiguration.GetSection("Name").Value;
+            var routingPattern =
+                rabbitConfiguration.GetSection("RoutingPattern").Value;
 
             model.ExchangeDeclare(
-                exchangeConfiguration.GetSection("Name").Value,
+                exchangeName,
                 exchangeConfiguration.GetSection("Type").Value,
                 exchangeConfiguration.GetValue<bool>("Durable"),
                 exchangeConfiguration.GetValue<bool>("Autodelete"));
@@ -39,10 +43,10 @@ namespace Watcher.Runner.RabbitMQReporter.Extensions
 
             model.QueueBind(
                 queueConfiguration.GetSection("Name").Value,
-                exchangeConfiguration.GetSection("Name").Value,
-                rabbitConfiguration.GetSection("RoutingPattern").Value);
+                exchangeName,
+                routingPattern);
 
-            var reporter = new RabbitReporter(model);
+            var reporter = new RabbitReporter(model, exchangeName, routingPattern);
             return builder.WithReporter(reporter);
         }
     }
