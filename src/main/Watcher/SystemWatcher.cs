@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Watcher.Interfaces;
 using Watcher.Runner.Interfaces;
@@ -19,9 +20,9 @@ namespace Watcher.Runner
 
         public IConfiguration Configuration { get; }
 
-        public void Run(string[] args)
+        public async Task Run(string[] args)
         {
-            Reporter.Report("Hello, World!");
+            await Reporter.ReportAsync("Hello, World!");
         }
     }
 }

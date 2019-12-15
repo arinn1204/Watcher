@@ -21,7 +21,9 @@ namespace Watcher.Runner
             var serviceContainer = BuildServiceContainer(startup);
 
             BuildWatcher(serviceContainer)
-                .Run(args);
+                .Run(args)
+                .GetAwaiter()
+                .GetResult();
         }
 
         private static IWatcher BuildWatcher(IContainer container)
