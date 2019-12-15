@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Watcher.Runner": {
+      "commandName": "Project",
+      "environmentVariables": {
+      }
+    }
+  }
+}
