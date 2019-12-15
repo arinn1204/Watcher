@@ -49,9 +49,15 @@ namespace Watcher.Runner
         }
 
         private void OnChange(object sender, FileSystemEventArgs e)
-            => Reporter.Report(e);
+        {
+            Console.WriteLine($"System event found: {e.ChangeType.ToString()}. Reporting Now");
+            Reporter.Report(e);
+        }
 
         private void OnRename(object sender, RenamedEventArgs e)
-            => Reporter.Report(e);
+        {
+            Console.WriteLine($"System event found: {e.ChangeType.ToString()}. Reporting Now");
+            Reporter.Report(e);
+        }
     }
 }
