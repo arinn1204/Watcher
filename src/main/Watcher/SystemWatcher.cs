@@ -36,7 +36,6 @@ namespace Watcher.Runner
                         IncludeSubdirectories = true
                     };
 
-                    watcher.Changed += OnChange;
                     watcher.Created += OnChange;
                     watcher.Deleted += OnChange;
                     watcher.Renamed += OnRename;
