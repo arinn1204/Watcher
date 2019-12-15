@@ -1,20 +1,25 @@
-﻿using RabbitMQ.Client;
+﻿using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System;
+using System.Text;
 using Watcher.Runner.Interfaces;
 
 namespace Watcher.Runner.Reporter.RabbitMQReporter
 {
     public class RabbitReporter : IReporter
     {
-        public RabbitReporter(IConnection connection)
+        private readonly IModel _model;
+
+        public RabbitReporter(IModel model)
         {
-            Connection = connection;
+            _model = model;
         }
 
-        public IConnection Connection { get; }
 
-        public void Report(object message)
+        public void Report<T>(T message)
         {
+            var stringMessage = JsonConvert.SerializeObject(message);
+            var convertedMessage = Encoding.UTF8.GetBytes(stringMessage);
             throw new NotImplementedException();
         }
     }

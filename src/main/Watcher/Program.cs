@@ -31,7 +31,7 @@ namespace Watcher.Runner
 
             return watcherBuilder
                 .WithConfiguration(config)
-                .AddRabbitReporter(config)
+                .AddRabbitReporter(config, "RabbitMQ")
                 .Build();
         }
 
