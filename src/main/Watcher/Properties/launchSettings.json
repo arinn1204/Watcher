@@ -2,8 +2,7 @@
   "profiles": {
     "Watcher.Runner": {
       "commandName": "Project",
-      "environmentVariables": {
-      }
+      "commandLineArgs": "."
     }
   }
 }

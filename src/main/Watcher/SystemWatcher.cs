@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -20,9 +22,36 @@ namespace Watcher.Runner
 
         public IConfiguration Configuration { get; }
 
-        public async Task Run(string[] args)
+        public void Run(IEnumerable<string> directoriesToWatch)
         {
-            await Reporter.ReportAsync("Hello, World!");
+            var watchers = directoriesToWatch
+                .Select(s =>
+                {
+                    var watcher = new FileSystemWatcher()
+                    {
+                        Path = s,
+                        NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.FileName,
+                        Filter = "*.done",
+                        IncludeSubdirectories = true
+                    };
+
+                    watcher.Changed += OnChange;
+                    watcher.Created += OnChange;
+                    watcher.Deleted += OnChange;
+                    watcher.Renamed += OnRename;
+
+                    watcher.EnableRaisingEvents = true;
+                    return watcher;
+                }).ToList();
+
+
+            while (true) ;
         }
+
+        private void OnChange(object sender, FileSystemEventArgs e)
+            => Reporter.Report(e);
+
+        private void OnRename(object sender, RenamedEventArgs e)
+            => Reporter.Report(e);
     }
 }

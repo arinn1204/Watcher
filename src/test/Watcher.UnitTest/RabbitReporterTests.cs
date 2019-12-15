@@ -57,7 +57,7 @@ namespace Watcher.UnitTest
             properties
                 .ContentType
                 .Should()
-                .Be($"application/c#.{type.ToLowerInvariant()}");
+                .Be($"application/c#.{type.ToLowerInvariant()}; charset=utf-8");
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace Watcher.UnitTest
             properties
                 .ContentType
                 .Should()
-                .Be("text/plain");
+                .Be("text/plain; charset=utf-8");
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace Watcher.UnitTest
             properties
                 .ContentType
                 .Should()
-                .Be("text/plain");
+                .Be("text/plain; charset=utf-8");
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace Watcher.UnitTest
             properties
                 .ContentType
                 .Should()
-                .Be("application/json");
+                .Be("application/json; charset=utf-8");
         }
 
         [Test]

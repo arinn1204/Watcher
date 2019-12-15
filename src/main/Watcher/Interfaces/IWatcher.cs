@@ -11,6 +11,6 @@ namespace Watcher.Interfaces
     {
         IReporter Reporter { get; }
         IConfiguration Configuration { get; }
-        Task Run(string[] args);
+        void Run(IEnumerable<string> directoriesToWatch);
     }
 }
