@@ -30,7 +30,8 @@ namespace Watcher.Runner
                     var watcher = new FileSystemWatcher()
                     {
                         Path = s,
-                        NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.FileName,
+                        NotifyFilter = NotifyFilters.CreationTime 
+                                        | NotifyFilters.FileName,
                         Filter = "*.done",
                         IncludeSubdirectories = true
                     };
