@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Watcher.Runner.Reporter.RabbitMQReporter;
 
 namespace Watcher.UnitTest
@@ -122,6 +123,24 @@ namespace Watcher.UnitTest
             var messageProperties = CreateMessageProperties(model);
 
             reporter.Report(message);
+
+            var (_, body) = messageProperties();
+
+            var json = Encoding.UTF8.GetString(body);
+            JsonConvert.DeserializeObject<List<int>>(json)
+                .Should()
+                .BeEquivalentTo(message);
+        }
+
+        [Test]
+        public async Task ShouldAsyncronouslyCallPublishWithEncodedVersionMessage()
+        {
+            var model = _fixture.Freeze<Mock<IModel>>();
+            var reporter = _fixture.Create<RabbitReporter>();
+            var message = new List<int>() { 1, 2, 3 };
+            var messageProperties = CreateMessageProperties(model);
+
+            await reporter.ReportAsync(message);
 
             var (_, body) = messageProperties();
 
