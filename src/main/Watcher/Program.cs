@@ -11,6 +11,7 @@ namespace Watcher.Runner
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Building configuration.");
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("WATCHER_ENVIRONMENT")}.json", true)
@@ -20,6 +21,7 @@ namespace Watcher.Runner
             var startup = new Startup(config);
             var serviceContainer = BuildServiceContainer(startup);
 
+            Console.WriteLine("Beginning run.");
             BuildWatcher(serviceContainer)
                 .Run(args);
         }
@@ -29,6 +31,7 @@ namespace Watcher.Runner
             var watcherBuilder = container.Resolve<IWatcherBuilder>();
             var config = container.Resolve<IConfiguration>();
 
+            Console.WriteLine("Building the builder.");
             return watcherBuilder
                 .WithConfiguration(config)
                 .AddRabbitReporter(config, "RabbitMQ")

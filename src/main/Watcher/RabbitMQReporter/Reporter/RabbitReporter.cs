@@ -30,6 +30,7 @@ namespace Watcher.Runner.Reporter.RabbitMQReporter
             byte[] convertedMessage;
             if (messageType == typeof(string) || messageType.BaseType == typeof(Enum))
             {
+                Console.WriteLine($"Publishing: {message}");
                 convertedMessage = Encoding.UTF8.GetBytes(message.ToString());
                 properties.ContentType = "text/plain; charset=utf-8";
             }
@@ -41,6 +42,8 @@ namespace Watcher.Runner.Reporter.RabbitMQReporter
                 properties.ContentType = messageType.IsValueType
                     ? $"application/c#.{messageType.Name.ToLowerInvariant()}; charset=utf-8"
                     : "application/json; charset=utf-8";
+
+                Console.WriteLine($"Publishing: {stringMessage}");
             }
 
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Watcher.Interfaces;
 using Watcher.Runner.Interfaces;
 
@@ -27,6 +28,8 @@ namespace Watcher.Runner
             var watchers = directoriesToWatch
                 .Select(s =>
                 {
+
+                    Console.WriteLine($"Beginning watch on: [*.done] files.");
                     var watcher = new FileSystemWatcher()
                     {
                         Path = s,
@@ -45,6 +48,7 @@ namespace Watcher.Runner
                 }).ToList();
 
 
+            Console.WriteLine($"Beginning watch on: {JsonConvert.SerializeObject(directoriesToWatch)}.");
             while (true) ;
         }
 
